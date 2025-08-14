@@ -7,7 +7,6 @@ import tictactoe as ttt
 pygame.init()
 size = width, height = 600, 400
 
-# Colors
 black = (0, 0, 0)
 white = (255, 255, 255)
 
@@ -29,16 +28,16 @@ while True:
 
     screen.fill(black)
 
-    # Let user choose a player.
+
     if user is None:
 
-        # Draw title
+
         title = largeFont.render("Play Tic-Tac-Toe", True, white)
         titleRect = title.get_rect()
         titleRect.center = ((width / 2), 50)
         screen.blit(title, titleRect)
 
-        # Draw buttons
+ 
         playXButton = pygame.Rect((width / 8), (height / 2), width / 4, 50)
         playX = mediumFont.render("Play as X", True, black)
         playXRect = playX.get_rect()
@@ -53,7 +52,7 @@ while True:
         pygame.draw.rect(screen, white, playOButton)
         screen.blit(playO, playORect)
 
-        # Check if button is clicked
+
         click, _, _ = pygame.mouse.get_pressed()
         if click == 1:
             mouse = pygame.mouse.get_pos()
@@ -66,7 +65,7 @@ while True:
 
     else:
 
-        # Draw game board
+ 
         tile_size = 80
         tile_origin = (width / 2 - (1.5 * tile_size),
                        height / 2 - (1.5 * tile_size))
@@ -92,7 +91,7 @@ while True:
         game_over = ttt.terminal(board)
         player = ttt.player(board)
 
-        # Show title
+
         if game_over:
             winner = ttt.winner(board)
             if winner is None:
