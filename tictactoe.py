@@ -175,6 +175,10 @@ def minimax_score(board):
             for move in moves:
                 test_board=result(board,move)
                 score = minimax_score(test_board)
+                if score > max:
+                    max = score
+            return max
+
 
         elif player(board)==O:
             min=5
@@ -182,7 +186,9 @@ def minimax_score(board):
             for move in moves:
                 test_board=result(board,move)
                 score = minimax_score(test_board)
-    return score
+                if score < min:
+                    min = score
+            return min
 
 
 
