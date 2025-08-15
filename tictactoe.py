@@ -50,7 +50,7 @@ def actions(board):
     return moves
 
 
-    raise NotImplementedError
+
 
 
 def result(board, action):
@@ -72,7 +72,6 @@ def result(board, action):
     return board_copy
     
 
-    raise NotImplementedError
 
 
 def winner(board):
@@ -142,53 +141,63 @@ def minimax(board):
 
     best_set=None
     if(player(board)==X):
-        max=-5
+        max_score=-100
+        alpha=-100
+        beta=100
         moves=actions(board)
         for move in moves:
             test_board=result(board,move)
-            score = minimax_score(test_board)
-            if score > max:
-                max = score
+            score = minimax_score(test_board,alpha,beta)
+            if score > max_score: 
+                max_score = score
                 best_set = move
+            alpha=max(max_score,alpha)
 
     elif(player(board)==O):
-        min=5
+        min_score=100
+        alpha=-100
+        beta=100
         moves=actions(board)
         for move in moves:
             test_board=result(board,move)
-            score = minimax_score(test_board)
+            score = minimax_score(test_board,alpha,beta)
 
-            if score < min:
-                min = score
+            if score < min_score:
+                min_score = score
                 best_set = move
+            beta=min(min_score,beta)
 
     return best_set
 
 
-def minimax_score(board):
+def minimax_score(board,alpha,beta):
     if terminal(board)==True:
         return utility(board)
     else:
         if player(board)==X:
-            max=-5
+            max_score=-100
             moves=actions(board)
             for move in moves:
                 test_board=result(board,move)
-                score = minimax_score(test_board)
-                if score > max:
-                    max = score
-            return max
+                score = minimax_score(test_board,alpha,beta)    
+                max_score=max(max_score,score)
+                alpha=max(alpha,max_score)
+                if alpha>=beta:
+                    break
+            return max_score
 
 
         elif player(board)==O:
-            min=5
+            min_score=100
             moves=actions(board)
             for move in moves:
                 test_board=result(board,move)
-                score = minimax_score(test_board)
-                if score < min:
-                    min = score
-            return min
+                score = minimax_score(test_board,alpha,beta)
+                min_score=min(min_score,score)
+                beta=min(beta,min_score)
+                if beta<=alpha:
+                    break
+            return min_score
 
 
 
