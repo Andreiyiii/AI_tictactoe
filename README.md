@@ -1,2 +1,3 @@
-#AI_tictactoe
-Only made modifications on runner.py from cs50
+# AI_tictactoe
+
+Only made modifications on tictactoe.py from cs50
